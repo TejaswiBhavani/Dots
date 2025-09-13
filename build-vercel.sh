@@ -17,8 +17,14 @@ cp tailwind.config.vercel.mjs src/tailwind.config.mjs
 mv src/components/ui/image.tsx src/components/ui/image.tsx.bak 2>/dev/null || true
 cp src/components/ui/image.vercel.tsx src/components/ui/image.tsx 
 
+# Create fallback integrations file
+cp src/integrations.vercel.tsx src/integrations.tsx
+
 # Remove integrations directory (Wix-specific code not needed for Vercel)
 mv integrations integrations.bak 2>/dev/null || true
+
+# Remove dynamic route files that cause issues in static builds
+mv src/pages/[...slug].astro src/pages/[...slug].astro.bak 2>/dev/null || true
 
 # Create simplified page without Wix SEO dependencies
 cat > src/pages/index.astro << 'EOF'
