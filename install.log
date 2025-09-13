@@ -1,0 +1,113 @@
+npm warn ERESOLVE overriding peer dependency
+npm warn While resolving: @dnd-kit/modifiers@6.1.0-wix.7
+npm warn Found: @dnd-kit/core@6.1.0-wix.9
+npm warn node_modules/@dnd-kit/core
+npm warn   @dnd-kit/core@"https://wixmp-63fb97685840e8c34a920619.wixmp.com/npm/dnd-kit-core-6.1.0-wix.9.tgz" from @wix/wix-style-react-incubator@3.13.0
+npm warn   node_modules/@wix/wix-style-react-incubator
+npm warn     @wix/wix-style-react-incubator@"3.13.0" from @wix/patterns@1.242.0
+npm warn     node_modules/@wix/patterns
+npm warn
+npm warn Could not resolve dependency:
+npm warn peer @dnd-kit/core@"^6.0.6" from @dnd-kit/modifiers@6.1.0-wix.7
+npm warn node_modules/@dnd-kit/modifiers
+npm warn   @dnd-kit/modifiers@"https://wixmp-63fb97685840e8c34a920619.wixmp.com/npm/dnd-kit-modifiers-6.1.0-wix.7.tgz" from @wix/wix-style-react-incubator@3.13.0
+npm warn   node_modules/@wix/wix-style-react-incubator
+npm warn
+npm warn Conflicting peer dependency: @dnd-kit/core@6.3.1
+npm warn node_modules/@dnd-kit/core
+npm warn   peer @dnd-kit/core@"^6.0.6" from @dnd-kit/modifiers@6.1.0-wix.7
+npm warn   node_modules/@dnd-kit/modifiers
+npm warn     @dnd-kit/modifiers@"https://wixmp-63fb97685840e8c34a920619.wixmp.com/npm/dnd-kit-modifiers-6.1.0-wix.7.tgz" from @wix/wix-style-react-incubator@3.13.0
+npm warn     node_modules/@wix/wix-style-react-incubator
+npm warn ERESOLVE overriding peer dependency
+npm warn While resolving: @dnd-kit/sortable@7.0.2
+npm warn Found: @dnd-kit/core@6.1.0-wix.9
+npm warn node_modules/@dnd-kit/core
+npm warn   @dnd-kit/core@"https://wixmp-63fb97685840e8c34a920619.wixmp.com/npm/dnd-kit-core-6.1.0-wix.9.tgz" from @wix/wix-style-react-incubator@3.13.0
+npm warn   node_modules/@wix/wix-style-react-incubator
+npm warn     @wix/wix-style-react-incubator@"3.13.0" from @wix/patterns@1.242.0
+npm warn     node_modules/@wix/patterns
+npm warn
+npm warn Could not resolve dependency:
+npm warn peer @dnd-kit/core@"^6.0.7" from @dnd-kit/sortable@7.0.2
+npm warn node_modules/@dnd-kit/sortable
+npm warn   @dnd-kit/sortable@"^7.0.2" from @wix/wix-style-react-incubator@3.13.0
+npm warn   node_modules/@wix/wix-style-react-incubator
+npm warn
+npm warn Conflicting peer dependency: @dnd-kit/core@6.3.1
+npm warn node_modules/@dnd-kit/core
+npm warn   peer @dnd-kit/core@"^6.0.7" from @dnd-kit/sortable@7.0.2
+npm warn   node_modules/@dnd-kit/sortable
+npm warn     @dnd-kit/sortable@"^7.0.2" from @wix/wix-style-react-incubator@3.13.0
+npm warn     node_modules/@wix/wix-style-react-incubator
+npm warn ERESOLVE overriding peer dependency
+npm warn While resolving: @react-leaflet/core@3.0.0
+npm warn Found: react@18.3.1
+npm warn node_modules/react
+npm warn   dev react@"^18.3.0" from the root project
+npm warn   127 more (@astrojs/react, @dnd-kit/accessibility, @dnd-kit/core, ...)
+npm warn
+npm warn Could not resolve dependency:
+npm warn peer react@"^19.0.0" from @react-leaflet/core@3.0.0
+npm warn node_modules/@react-leaflet/core
+npm warn   @react-leaflet/core@"^3.0.0" from react-leaflet@5.0.0
+npm warn   node_modules/react-leaflet
+npm warn
+npm warn Conflicting peer dependency: react@19.1.1
+npm warn node_modules/react
+npm warn   peer react@"^19.0.0" from @react-leaflet/core@3.0.0
+npm warn   node_modules/@react-leaflet/core
+npm warn     @react-leaflet/core@"^3.0.0" from react-leaflet@5.0.0
+npm warn     node_modules/react-leaflet
+npm warn ERESOLVE overriding peer dependency
+npm warn While resolving: @react-leaflet/core@3.0.0
+npm warn Found: react-dom@18.3.1
+npm warn node_modules/react-dom
+npm warn   dev react-dom@"^18.3.0" from the root project
+npm warn   73 more (@astrojs/react, @dnd-kit/core, @floating-ui/react, ...)
+npm warn
+npm warn Could not resolve dependency:
+npm warn peer react-dom@"^19.0.0" from @react-leaflet/core@3.0.0
+npm warn node_modules/@react-leaflet/core
+npm warn   @react-leaflet/core@"^3.0.0" from react-leaflet@5.0.0
+npm warn   node_modules/react-leaflet
+npm warn
+npm warn Conflicting peer dependency: react-dom@19.1.1
+npm warn node_modules/react-dom
+npm warn   peer react-dom@"^19.0.0" from @react-leaflet/core@3.0.0
+npm warn   node_modules/@react-leaflet/core
+npm warn     @react-leaflet/core@"^3.0.0" from react-leaflet@5.0.0
+npm warn     node_modules/react-leaflet
+npm error code ERESOLVE
+npm error ERESOLVE could not resolve
+npm error
+npm error While resolving: @tailwindcss/vite@4.1.11
+npm error Found: vite@4.5.14
+npm error node_modules/vite
+npm error   dev vite@"^4.5.0" from the root project
+npm error   peer vite@"^4.2.0 || ^5.0.0 || ^6.0.0 || ^7.0.0" from @vitejs/plugin-react@4.7.0
+npm error   node_modules/@vitejs/plugin-react
+npm error     @vitejs/plugin-react@"^4.4.1" from @astrojs/react@4.3.0
+npm error     node_modules/@astrojs/react
+npm error       @astrojs/react@"^4.2.3" from the root project
+npm error   3 more (vite-plugin-node-polyfills, vite-tsconfig-paths, vitefu)
+npm error
+npm error Could not resolve dependency:
+npm error peer vite@"^5.2.0 || ^6 || ^7" from @tailwindcss/vite@4.1.11
+npm error node_modules/@tailwindcss/vite
+npm error   @tailwindcss/vite@"^4.0.13" from the root project
+npm error
+npm error Conflicting peer dependency: vite@7.1.5
+npm error node_modules/vite
+npm error   peer vite@"^5.2.0 || ^6 || ^7" from @tailwindcss/vite@4.1.11
+npm error   node_modules/@tailwindcss/vite
+npm error     @tailwindcss/vite@"^4.0.13" from the root project
+npm error
+npm error Fix the upstream dependency conflict, or retry
+npm error this command with --force or --legacy-peer-deps
+npm error to accept an incorrect (and potentially broken) dependency resolution.
+npm error
+npm error
+npm error For a full report see:
+npm error /home/runner/.npm/_logs/2025-09-13T12_15_58_309Z-eresolve-report.txt
+npm error A complete log of this run can be found in: /home/runner/.npm/_logs/2025-09-13T12_15_58_309Z-debug-0.log

@@ -50,6 +50,7 @@ VITE_PAYMENT_GATEWAY=wix
    - Build Command: `npm run build`
    - Output Directory: `dist`
    - Node.js Version: 18.x
+   - Install Command: `npm install --legacy-peer-deps` (required due to peer dependency conflicts)
 
 **Advantages**:
 - Automatic deployments from Git
