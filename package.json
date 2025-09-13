@@ -3,10 +3,12 @@
   "type": "module",
   "version": "1.0.0",
   "scripts": {
-    "dev": "wix dev",
-    "build": "wix build",
-    "preview": "wix preview",
-    "release": "wix release",
+  "dev": "wix dev",
+  "dev:astro": "astro dev",
+  "build": "astro build",
+  "build:wix": "wix build",
+  "preview": "astro preview",
+  "release": "wix release",
     "env": "wix env pull",
     "check": "npx astro check --js-only",
     "test:run": "vitest run",
@@ -14,7 +16,8 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
-    "@astrojs/cloudflare": "^12.5.3",
+  "@astrojs/cloudflare": "^12.5.3",
+  "@astrojs/vercel": "^7.8.0",
     "@astrojs/react": "^4.2.3",
     "@astrojs/tailwind": "^6.0.2",
     "@hello-pangea/dnd": "^18.0.1",
@@ -138,7 +141,7 @@
     "react-dom": "^18.3.0",
     "sass-embedded": "^1.89.2",
     "typescript": "^5.8.3",
-    "vite": "^4.5.0",
+  "vite": "^5.4.0",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "3.1.4"
   }

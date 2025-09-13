@@ -47,11 +47,10 @@ VITE_PAYMENT_GATEWAY=wix
 **Steps**:
 1. Connect GitHub repository to Vercel
 2. Configure build settings:
-   - Framework Preset: Other
-   - Build Command: `npm run build`
-   - Output Directory: `dist`
-   - Install Command: `npm install --legacy-peer-deps` (REQUIRED - resolves dependency conflicts)
-   - Node.js Version: 18.x
+  - Framework Preset: Astro
+  - Build Command: `npm run build`
+  - Install Command: `npm install` (repo ships with `.npmrc` setting `legacy-peer-deps=true`)
+  - Node.js Version: 20.x
 
 **Advantages**:
 - Automatic deployments from Git
@@ -69,6 +68,8 @@ VITE_API_BASE_URL=https://your-api.vercel.app
 VITE_AI_PROVIDER=local
 VITE_PAYMENT_GATEWAY=mock
 VITE_FEATURE_AI_ASSISTANT=true
+# Optional, only if using Wix APIs in cloud:
+# WIX_CLIENT_ID=your_wix_client_id
 ```
 
 ### 3. Netlify

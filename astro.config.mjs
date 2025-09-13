@@ -1,15 +1,15 @@
 // @ts-check
 import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
-import cloudflare from "@astrojs/cloudflare";
+import vercel from "@astrojs/vercel/serverless";
 import wix from "@wix/astro";
 import react from "@astrojs/react";
 import sourceAttrsPlugin from "@wix/babel-plugin-jsx-source-attrs";
 import dynamicDataPlugin from "@wix/babel-plugin-jsx-dynamic-data";
-import { nodePolyfills } from "vite-plugin-node-polyfills";
 import customErrorOverlayPlugin from "./vite-error-overlay-plugin.js";
 
 const isBuild = process.env.NODE_ENV == "production";
+const hasWixEnv = !!process.env.WIX_CLIENT_ID;
 
 // https://astro.build/config
 export default defineConfig({
@@ -31,24 +31,22 @@ export default defineConfig({
       },
     },
     tailwind(),
-    wix({
-      enableHtmlEmbeds: isBuild,
-      enableAuthRoutes: true
-    }),
+    hasWixEnv &&
+      wix({
+        enableHtmlEmbeds: isBuild,
+        enableAuthRoutes: true,
+      }),
     react({ babel: { plugins: [sourceAttrsPlugin, dynamicDataPlugin] } }),
-  ],
+  ].filter(Boolean),
   vite: {
-    plugins: [
-      customErrorOverlayPlugin(),
-      ...(isBuild ? [nodePolyfills()] : []),
-    ],
+    plugins: [customErrorOverlayPlugin()],
   },
-  adapter: isBuild ? cloudflare() : undefined,
+  adapter: isBuild ? vercel() : undefined,
   devToolbar: {
     enabled: false,
   },
   image: {
-    domains: ["static.wixstatic.com"],
+  domains: ["static.wixstatic.com"],
   },
   server: {
     allowedHosts: true,
