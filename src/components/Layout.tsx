@@ -5,6 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Image } from '@/components/ui/image';
 import { useMember } from '@/integrations';
+import { useCart } from '@/lib/cart-service';
+import AIAssistant from '@/components/AIAssistant';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -15,6 +17,7 @@ export default function Layout({ children }: LayoutProps) {
   const [searchQuery, setSearchQuery] = useState('');
   const location = useLocation();
   const { member, isAuthenticated, isLoading, actions } = useMember();
+  const { cart } = useCart();
 
   const navigation = [
     { name: 'Home', href: '/' },
@@ -97,7 +100,7 @@ export default function Layout({ children }: LayoutProps) {
               <Link to="/cart" className="relative">
                 <ShoppingCart className="w-5 h-5 hover:text-neonaccent transition-colors" />
                 <span className="absolute -top-2 -right-2 bg-neonaccent text-primary text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold">
-                  0
+                  {cart.itemCount}
                 </span>
               </Link>
               
@@ -201,6 +204,10 @@ export default function Layout({ children }: LayoutProps) {
       </header>
       {/* Main Content */}
       <main>{children}</main>
+      
+      {/* AI Assistant - Floating widget */}
+      <AIAssistant />
+      
       {/* Footer */}
       <footer className="bg-primary text-primary-foreground">
         <div className="max-w-[120rem] mx-auto px-4 sm:px-6 lg:px-8 py-12">

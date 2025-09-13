@@ -6,9 +6,16 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Image } from '@/components/ui/image';
 import { motion } from 'framer-motion';
+import { ProductService, type Product } from '@/lib/product-service';
+import { useCart } from '@/lib/cart-service';
+import { useNotifications } from '@/lib/notifications';
 
 export default function HomePage() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const { addToCart } = useCart();
+  const notifications = useNotifications();
 
   // Hero carousel data
   const heroSlides = [
@@ -53,57 +60,22 @@ export default function HomePage() {
     { name: "Embroidery", icon: "🧵", href: "/discover?category=embroidery" }
   ];
 
-  // Featured products
-  const featuredProducts = [
-    {
-      id: 1,
-      name: "Handpainted Madhubani Art",
-      artist: "Priya Sharma",
-      price: 2500,
-      originalPrice: 3000,
-      rating: 4.8,
-      reviews: 124,
-      image: "https://static.wixstatic.com/media/d7d9fb_ad3f9457377f4bc081242fa7abbdcbe9~mv2.png?originWidth=384&originHeight=192",
-      tags: ["Bestseller", "Traditional"],
-      colors: ["#FF6B6B", "#4ECDC4", "#45B7D1"]
-    },
-    {
-      id: 2,
-      name: "Brass Ganesha Sculpture",
-      artist: "Rajesh Kumar",
-      price: 4200,
-      originalPrice: 5000,
-      rating: 4.9,
-      reviews: 89,
-      image: "https://static.wixstatic.com/media/d7d9fb_f89183149b6f4c7683323919db071fab~mv2.png?originWidth=384&originHeight=192",
-      tags: ["New", "Spiritual"],
-      colors: ["#FFD700", "#CD7F32"]
-    },
-    {
-      id: 3,
-      name: "Embroidered Wall Hanging",
-      artist: "Meera Devi",
-      price: 1800,
-      originalPrice: 2200,
-      rating: 4.7,
-      reviews: 156,
-      image: "https://static.wixstatic.com/media/d7d9fb_759a6b92129a4699a10d339643bc662a~mv2.png?originWidth=384&originHeight=192",
-      tags: ["Handmade", "Colorful"],
-      colors: ["#E74C3C", "#F39C12", "#8E44AD"]
-    },
-    {
-      id: 4,
-      name: "Terracotta Vase Set",
-      artist: "Amit Patel",
-      price: 3200,
-      originalPrice: 3800,
-      rating: 4.6,
-      reviews: 78,
-      image: "https://static.wixstatic.com/media/d7d9fb_916264f4325d49de88b09aa5764c73c3~mv2.png?originWidth=384&originHeight=192",
-      tags: ["Eco-friendly", "Home Decor"],
-      colors: ["#D2691E", "#8B4513"]
-    }
-  ];
+  // Load featured products
+  useEffect(() => {
+    const loadFeaturedProducts = async () => {
+      try {
+        setIsLoading(true);
+        const products = await ProductService.getFeaturedProducts(4);
+        setFeaturedProducts(products);
+      } catch (error) {
+        console.error('Error loading featured products:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadFeaturedProducts();
+  }, []);
 
   // Auto-advance carousel
   useEffect(() => {
@@ -112,6 +84,17 @@ export default function HomePage() {
     }, 5000);
     return () => clearInterval(timer);
   }, [heroSlides.length]);
+
+  const handleAddToCart = (product: Product) => {
+    addToCart({
+      productId: product._id,
+      productName: product.name,
+      productImage: product.images[0],
+      artistName: product.artistName,
+      price: product.price
+    });
+    notifications.productAddedToCart(product.name);
+  };
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
@@ -259,7 +242,22 @@ export default function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {featuredProducts.map((product, index) => (
+            {isLoading ? (
+              // Loading skeleton
+              Array.from({ length: 4 }).map((_, index) => (
+                <Card key={index} className="group hover:shadow-lg transition-shadow duration-300 border-0">
+                  <CardContent className="p-0">
+                    <div className="bg-gray-200 animate-pulse h-48 rounded-t-lg" />
+                    <div className="p-4 space-y-3">
+                      <div className="bg-gray-200 animate-pulse h-4 rounded" />
+                      <div className="bg-gray-200 animate-pulse h-3 rounded w-2/3" />
+                      <div className="bg-gray-200 animate-pulse h-4 rounded w-1/2" />
+                    </div>
+                  </CardContent>
+                </Card>
+              ))
+            ) : (
+              featuredProducts.map((product, index) => (
               <motion.div
                 key={product.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -270,7 +268,7 @@ export default function HomePage() {
                   <CardContent className="p-0">
                     <div className="relative overflow-hidden rounded-t-lg">
                       <Image
-                        src={product.image}
+                        src={product.images[0]}
                         alt={product.name}
                         width={400}
                         className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
@@ -296,7 +294,7 @@ export default function HomePage() {
                         {product.name}
                       </h3>
                       <p className="text-sm mb-2 text-color-10 font-heading">
-                        by {product.artist}
+                        by {product.artistName}
                       </p>
 
                       <div className="flex items-center mb-2">
@@ -307,7 +305,7 @@ export default function HomePage() {
                           </span>
                         </div>
                         <span className="text-xs ml-2 font-heading text-color-10">
-                          ({product.reviews} reviews)
+                          ({product.reviewCount} reviews)
                         </span>
                       </div>
 
@@ -316,12 +314,14 @@ export default function HomePage() {
                           <span className="font-heading font-bold text-lg text-primary">
                             ₹{product.price.toLocaleString()}
                           </span>
-                          <span className="text-sm line-through text-color-10 font-heading">
-                            ₹{product.originalPrice.toLocaleString()}
-                          </span>
+                          {product.originalPrice && (
+                            <span className="text-sm line-through text-color-10 font-heading">
+                              ₹{product.originalPrice.toLocaleString()}
+                            </span>
+                          )}
                         </div>
                         <div className="flex space-x-1">
-                          {product.colors.map((color, idx) => (
+                          {product.colors?.map((color, idx) => (
                             <div
                               key={idx}
                               className="w-4 h-4 rounded-full border-2 border-white shadow-sm"
@@ -334,6 +334,7 @@ export default function HomePage() {
                       <div className="flex space-x-2">
                         <Button
                           size="sm"
+                          onClick={() => handleAddToCart(product)}
                           className="flex-1 bg-primary text-primary-foreground hover:bg-primary/90"
                         >
                           <ShoppingCart className="w-4 h-4 mr-2" />
@@ -342,16 +343,18 @@ export default function HomePage() {
                         <Button
                           size="sm"
                           variant="outline"
+                          asChild
                           className="border-primary text-primary hover:bg-primary hover:text-primary-foreground"
                         >
-                          View
+                          <Link to={`/product/${product._id}`}>View</Link>
                         </Button>
                       </div>
                     </div>
                   </CardContent>
                 </Card>
               </motion.div>
-            ))}
+              ))
+            )}
           </div>
 
           <div className="text-center mt-8">
