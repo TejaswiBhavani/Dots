@@ -11,6 +11,13 @@ import customErrorOverlayPlugin from "./vite-error-overlay-plugin.js";
 const isBuild = process.env.NODE_ENV == "production";
 const hasWixEnv = !!process.env.WIX_CLIENT_ID;
 
+// Log the Wix integration status for debugging
+if (hasWixEnv) {
+  console.log("✅ Wix environment detected - loading @wix/astro integration");
+} else {
+  console.log("⚠️  No Wix environment - skipping @wix/astro integration");
+}
+
 // https://astro.build/config
 export default defineConfig({
   output: "server",
