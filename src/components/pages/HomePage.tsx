@@ -8,12 +8,14 @@ import { Image } from '@/components/ui/image';
 import { motion } from 'framer-motion';
 import { ProductService, type Product } from '@/lib/product-service';
 import { useCart } from '@/lib/cart-service';
+import { useNotifications } from '@/lib/notifications';
 
 export default function HomePage() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [featuredProducts, setFeaturedProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const { addToCart } = useCart();
+  const notifications = useNotifications();
 
   // Hero carousel data
   const heroSlides = [
@@ -91,7 +93,7 @@ export default function HomePage() {
       artistName: product.artistName,
       price: product.price
     });
-    // You could add a toast notification here
+    notifications.productAddedToCart(product.name);
   };
 
   const nextSlide = () => {
