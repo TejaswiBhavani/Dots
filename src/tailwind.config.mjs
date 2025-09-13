@@ -19,8 +19,8 @@ export default {
                 '9xl': ['8rem', { lineHeight: '1', letterSpacing: '-0.07em', fontWeight: '900' }],
             },
             fontFamily: {
-                heading: "barlow-medium",
-                paragraph: "barlow-extralight"
+                heading: ['Arial', 'sans-serif'],
+                paragraph: ['Arial', 'sans-serif']
             },
             colors: {
                 primary: "#000000",
@@ -40,5 +40,5 @@ export default {
     future: {
         hoverOnlyWhenSupported: true,
     },
-    plugins: [require('@tailwindcss/container-queries'), require('@tailwindcss/typography')],
+    plugins: [],
 }

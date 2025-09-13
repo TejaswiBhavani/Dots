@@ -2,6 +2,7 @@
 import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import cloudflare from "@astrojs/cloudflare";
+import vercel from "@astrojs/vercel/serverless";
 import wix from "@wix/astro";
 import react from "@astrojs/react";
 import sourceAttrsPlugin from "@wix/babel-plugin-jsx-source-attrs";
@@ -9,7 +10,8 @@ import dynamicDataPlugin from "@wix/babel-plugin-jsx-dynamic-data";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
 import customErrorOverlayPlugin from "./vite-error-overlay-plugin.js";
 
-const isBuild = process.env.NODE_ENV == "production";
+const isBuild = process.env.NODE_ENV === "production";
+const isVercel = process.env.VERCEL === "1" || process.env.npm_lifecycle_event === "build:vercel";
 
 // https://astro.build/config
 export default defineConfig({
@@ -43,7 +45,7 @@ export default defineConfig({
       ...(isBuild ? [nodePolyfills()] : []),
     ],
   },
-  adapter: isBuild ? cloudflare() : undefined,
+  adapter: isBuild ? (isVercel ? vercel() : cloudflare()) : undefined,
   devToolbar: {
     enabled: false,
   },

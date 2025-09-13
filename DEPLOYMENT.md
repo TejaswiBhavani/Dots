@@ -46,19 +46,21 @@ VITE_PAYMENT_GATEWAY=wix
 
 **Steps**:
 1. Connect GitHub repository to Vercel
-2. Configure build settings:
-   - Build Command: `npm run build`
-   - Output Directory: `dist`
-   - Node.js Version: 18.x
+2. Vercel will automatically detect `vercel.json` configuration
+3. Set environment variables in Vercel dashboard
+4. Deploy automatically triggers with custom build process
+
+**Note**: Uses simplified configuration for Vercel compatibility. See [VERCEL_DEPLOYMENT.md](./VERCEL_DEPLOYMENT.md) for detailed setup.
 
 **Advantages**:
 - Automatic deployments from Git
 - Preview deployments for PRs
 - Edge functions support
 - Fast global CDN
+- Custom build process handles dependency conflicts
 
 **Limitations**:
-- Wix integrations may require additional configuration
+- Wix integrations excluded for compatibility
 - E-commerce features limited without Wix backend
 
 **Environment Variables**:

@@ -1,0 +1,23 @@
+{
+  "framework": "astro",
+  "buildCommand": "./build-vercel.sh",
+  "outputDirectory": "dist",
+  "functions": {
+    "src/pages/api/**/*.ts": {
+      "runtime": "nodejs18.x"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production",
+    "VITE_API_BASE_URL": "@vite_api_base_url",
+    "VITE_AI_PROVIDER": "@vite_ai_provider", 
+    "VITE_PAYMENT_GATEWAY": "@vite_payment_gateway",
+    "VITE_FEATURE_AI_ASSISTANT": "@vite_feature_ai_assistant"
+  }
+}
