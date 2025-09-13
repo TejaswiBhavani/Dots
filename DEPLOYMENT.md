@@ -47,10 +47,11 @@ VITE_PAYMENT_GATEWAY=wix
 **Steps**:
 1. Connect GitHub repository to Vercel
 2. Configure build settings:
+   - Framework Preset: Other
    - Build Command: `npm run build`
    - Output Directory: `dist`
+   - Install Command: `npm install --legacy-peer-deps` (REQUIRED - resolves dependency conflicts)
    - Node.js Version: 18.x
-   - Install Command: `npm install --legacy-peer-deps` (required due to peer dependency conflicts)
 
 **Advantages**:
 - Automatic deployments from Git
